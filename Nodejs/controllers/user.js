@@ -39,13 +39,26 @@ const Op = db.Sequelize.Op;
       }
 
       if(user.role === "hr"){
-        Leave.findAll().then(leave => {
+        Leave.findAll({}).then(leave => {
           console.log("leave ==>", leave)
+          leave.forEach( async (el) => {
+            User.findOne({
+              where: {
+                id: parseInt(el.userId)
+              }
+            }).then(data => {
+              el.firstName = data.firstName
+            })
+          })
           if (leave.length > 0) {
             req.app.set('loginData',{data: user, leaveData: leave, status: true,message: "User login successfully!"})
             res.redirect('/dashboard')
           }
          
+        }).catch(error=>{
+          console.log("error ==>", error)
+          req.app.set('loginData',{data: user, leaveData: [], status: true,message: "User login successfully!"})
+            res.redirect('/dashboard')
         })
       } else {
         req.app.set('loginData',{data: user, status: true,message: "User login successfully!"})

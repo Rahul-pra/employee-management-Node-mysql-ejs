@@ -20,7 +20,13 @@ module.exports = {
         default: 'pending'
       },
       userId:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId',
+        }
       },
       casual_leave:{
         type: Sequelize.FLOAT,

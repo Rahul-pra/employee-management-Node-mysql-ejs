@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('pending', 'approved', 'rejected'),
       defaultValue: 'pending'
     },
-    userId:DataTypes.INTEGER,
+    userId:DataTypes.NUMBER,
     casual_leave:DataTypes.FLOAT,
      sick_leave:DataTypes.FLOAT,
      paid_leave:DataTypes.FLOAT,

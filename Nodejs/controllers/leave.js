@@ -27,18 +27,18 @@ const Op = db.Sequelize.Op;
     switch(bodyData.leaveType) {
         case 'cl':
           // code block
-          setNewData.casual_leave = days;
+          setNewData.casual_leave = (bodyData.leaveOption === "halfDay") ? 0.5: days;
           break;
         case 'sl':
           // code block
-          setNewData.sick_leave = days;
+          setNewData.sick_leave =  (bodyData.leaveOption === "halfDay") ? 0.5: days;
             break;
         case 'pl':
-            setNewData.paid_leave = days;
+            setNewData.paid_leave =  (bodyData.leaveOption === "halfDay") ? 0.5: days;
             // code block
             break;
         case 'lwp':
-        setNewData.lwp = days;
+        setNewData.lwp =  (bodyData.leaveOption === "halfDay") ? 0.5: days;
         // code block
         break;
         default:
@@ -46,7 +46,11 @@ const Op = db.Sequelize.Op;
           // code block
       }
       setNewData.userId = parseInt(bodyData.userId);
-      setNewData.days = days;
+      if(bodyData.leaveOption === "halfDay"){
+        setNewData.days = 0.5;
+      } else {
+        setNewData.days = days;
+      }
       setNewData.daterange = bodyData.daterange;
       console.log("setNewData ==>", setNewData)
       Leave.create(setNewData).then(data => {
@@ -70,10 +74,21 @@ const Op = db.Sequelize.Op;
       }
     }).then( data => {
       console.log("data 1111==>", data)
+    
+     User.findOne({
+      where: {
+        id: parseInt(data.userId)
+      }
+    
+     // req.app.set('leaveData',{data: data, status: true,message: "leave data get successfully!"})
+      //res.redirect('/edit')
+    }).then( userdata => {
+     // console.log("data 1111==>", data)
+     data.firstName=userdata.firstName
       req.app.set('leaveData',{data: data, status: true,message: "leave data get successfully!"})
       res.redirect('/edit')
     })
-   
+   })
  };
 
  exports.leaveUpdate = (req, res) => {

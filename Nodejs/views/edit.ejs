@@ -16,6 +16,9 @@
         <h1>Edit!</h1>
         <span> Id: <%=  data.id %></span> <br>
         <span> userId: <%=  data.userId %></span> <br>
+        
+        <span> Employee Name: <%=  data.firstName%></span> <br>
+		
         <span> status: <%=  data.leave_status %></span> <br>
         <span> leave days: <%= data.days  %></span> <br>
         <span> Dates: <%=  data.daterange %></span> <br>
@@ -63,9 +66,9 @@
         $(function() {
             $('#reasonDiv').hide(); 
             $('#action').change(function(){
-                alert($('#reasonDiv').val() )
-                if($('#reasonDiv').val() == 'rejected') {
-                    alert($('#reasonDiv').val() )
+                //alert($('#action').val() )
+                if($('#action').val() == 'rejected') {
+                  //  alert($('#action').val() )
                     $('#reasonDiv').show(); 
                 } else {
                     $('#reasonDiv').hide(); 
