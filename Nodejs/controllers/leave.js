@@ -124,8 +124,17 @@ const Op = db.Sequelize.Op;
         })
       })
     }
-    Leave.findAll().then(leave => {
+    Leave.findAll({}).then(leave => {
       console.log("leave ==>", leave)
+      leave.forEach( async (el) => {
+        User.findOne({
+          where: {
+            id: parseInt(el.userId)
+          }
+        }).then(data => {
+          el.firstName = data.firstName
+        })
+      })
       if (leave.length > 0) {
         req.app.set('loginData',{data: req.app.get('loginData').data, leaveData: leave, status: true,message: "update leave status successfully!"})
         res.redirect('/dashboard')
