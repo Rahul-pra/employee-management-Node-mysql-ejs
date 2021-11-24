@@ -1,0 +1,19 @@
+Employee Leave Module
+
+You need to create a module in which the following points must be covered.
+1. You need to provide a login interface for HR and Employee. (No Need to provide registration page)
+
+-  Employee
+1. Employee can apply for leave
+2. Employee should be able to check available leave balance
+
+- HR
+1. HR can view all leaves applied by employee
+2. HR can approve/deny leave, if HR denies leave request, they must specify the reason for that.
+
+- Conditions need to apply
+1. Each employee has 6 casual leave(CL)
+, 6 Sick Leave(SL) & 6 Paid Leave(PL)
+2. Employee can apply only 2 CL or 2 PL per month, but they are allowed to apply as much leave as they want as leave without pay(LWP)
+3. To apply multiple leaves, there should be a date range picker.
+4. Employee can also apply for half day leave.

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <title>login!</title>
+ 
+  </head>
+  <body>
+    <div class="container-lg">
+        <h1>Edit!</h1>
+        <span> Id: <%=  data.id %></span> <br>
+        <span> userId: <%=  data.userId %></span> <br>
+        <span> status: <%=  data.leave_status %></span> <br>
+        <span> leave days: <%= data.days  %></span> <br>
+        <span> Dates: <%=  data.daterange %></span> <br>
+        <form action="/api/v1/leave-update" method="POST">
+            <div class="mb-3 row">
+                <label for="leaveType" class="col-sm-2 col-form-label">action</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" id="action" name="action">
+                    <option value="" selected>Select type</option>
+                    <option name="approved" value="approved">Approved</option>
+                    <option name="rejected" value="rejected">Rejected</option>
+                  </select>
+                </div>
+              </div>
+        <div class="mb-3 row" id="reasonDiv">
+            <label for="inputPassword" class="col-sm-2 col-form-label">reason</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="reason" placeholder="reason" name="reason">
+            </div>
+        </div>
+        <input class="form-select" type="text" name="leaveId" value="<%= data.id %>" hidden/>
+        <input class="form-select" type="text" name="casual_leave" value="<%= data.casual_leave %>" hidden/>
+        <input class="form-select" type="text" name="sick_leave" value="<%= data.sick_leave %>" hidden/>
+        <input class="form-select" type="text" name="paid_leave" value="<%= data.paid_leave %>" hidden/>
+        <input class="form-select" type="text" name="lwp" value="<%= data.lwp %>" hidden/>
+        <input class="form-select" type="text" name="days" value="<%= data.days %>" hidden/>
+        <input class="form-select" type="text" name="userId" value="<%= data.userId %>" hidden/>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Update</button>
+        </div>
+        </form>
+      </div>
+    
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <script>
+        $(function() {
+            $('#reasonDiv').hide(); 
+            $('#action').change(function(){
+                alert($('#reasonDiv').val() )
+                if($('#reasonDiv').val() == 'rejected') {
+                    alert($('#reasonDiv').val() )
+                    $('#reasonDiv').show(); 
+                } else {
+                    $('#reasonDiv').hide(); 
+                } 
+            });
+        });
+    </script>
+  </body>
+</html>
